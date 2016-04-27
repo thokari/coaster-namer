@@ -1,7 +1,13 @@
 import {Component} from 'angular2/core';
+import {NameGenerator} from './name-generator.component';
 
 @Component({
-    selector: 'my-app',
-    template: '<h1>My First Angular 2 App</h1>'
+  selector: 'coaster-namer',
+  template: `
+    <h1>Coaster Namer</h1>
+    <name-generator></name-generator>
+  `,
+  directives: [NameGenerator]
 })
+
 export class AppComponent { }
