@@ -3,8 +3,8 @@ import {Component} from 'angular2/core'
 @Component({
   selector: 'name-generator',
   template: `
-    <button (click)="generateName()">Generate!</button>
     <div class="generated-name">{{ generatedName }}</div>
+    <button (click)="generateName()">Generate!</button>
   `
 })
 
@@ -31,29 +31,39 @@ export class NameGenerator {
       'Red',
       'Blue',
       'Booty',
+      'Iron',
       'Steep',
-      'Deep'
+      'Deep',
+      'High',
+      'Fast',
+      'Great',
+      'Screaming'
     ]
 
     var mains = [
       'Corsair',
       'Cruiser',
+      'Curse',
       'Diver',
       'Rattler',
       'Titan',
-      'Colossus'
+      'Colossus',
+      'Kraken',
+      'Widow'
     ]
 
     var suffixes = [
       'of Steel',
+      'of Fear',
+      'of Screaming'
     ]
 
     var article = maybeNotEmpty(randomFromArray(articles))
     var prefix = maybeNotEmpty(randomFromArray(prefixes))
     var main = randomFromArray(mains)
-    var suffix = maybeNotEmpty(randomFromArray(suffixes), 0.33)
+    var suffix = maybeNotEmpty(randomFromArray(suffixes), 0.25)
 
-    this.generatedName = [article, prefix, main, suffix].join(' ')
+    this.generatedName = [article, prefix, main, suffix].join(' ').replace(/\s+/g, ' ')
 
   }
 }
