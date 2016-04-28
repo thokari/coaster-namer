@@ -1,4 +1,65 @@
+body {
+  background-image: url("/image/landscape-background.png");
+  background-size: cover;
+}
+
+.billboard-wrapper {
+  position: relative;
+  width: 640px;
+  height: 520px;
+  left: calc(50% - 320px);
+  top: 120px;
+
+}
+
+.billboard-content {
+  position: absolute;
+  width: 574px;
+  height: 250px;
+  top: 18px;
+  left: 15px;
+  padding: 20px;
+}
+
+@font-face {
+  font-family: TabarraShadow;
+  src: url("/font/Tabarra-Shadow-FFP.otf");
+}
+
+@font-face {
+  font-family: Carousel;
+  src: url("/font/Carousel.ttf");
+}
+
+@font-face {
+  font-family: BudmoJiggler;
+  src: url("/font/BudmoJiggler.ttf");
+}
+
 .generated-name {
+  position: relative;
+  top: 20px;
+  text-align: center;
+  font-family: TabarraShadow;
   font-size: 60px;
   color: #000000;
+}
+
+#generate-button {
+  position: absolute;
+  bottom: 20px;
+  right: -30px;
+  background: url(/image/new-sign-01.svg) no-repeat;
+  cursor: pointer;
+  width: 180px;
+  height: 130px;
+  border: none;
+}
+
+div#generate-button {
+
+}
+
+.headline {
+  text-align: center;
 }

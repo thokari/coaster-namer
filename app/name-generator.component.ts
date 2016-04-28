@@ -1,25 +1,36 @@
-import {Component} from 'angular2/core'
+import {Component, OnInit} from 'angular2/core'
 
 @Component({
   selector: 'name-generator',
   template: `
-    <div class="generated-name">{{ generatedName }}</div>
-    <button (click)="generateName()">Generate!</button>
+    <div class="billboard-wrapper">
+      <object type="image/svg+xml"
+        data="/image/billboard-frame.svg">
+      </object>
+      <div class="billboard-content">
+        <div class="generated-name">{{ generatedName }}</div>
+        <div id="generate-button" (click)="generateName()"></div>
+        <!--button id="generate-button" (click)="generateName()">Generate!</button-->
+      </div>
+    </div>
   `
 })
 
-export class NameGenerator {
+export class NameGenerator implements OnInit {
   generatedName = ''
 
-  generateName () {
+  ngOnInit () {
+    this.generateName()
+  }
 
+  generateName () {
     var rng = Math.random
 
-    let randomFromArray = function (items: Array<String>): String {
+    let randomFromArray = function (items: Array<string>): string {
       return items[Math.floor(rng() * items.length)]
     }
 
-    let maybeNotEmpty = function (item: String, probability = 0.5): String {
+    let maybePresent = function (item: string, probability = 0.5): string {
       return rng() <= probability ? item : ''
     }
 
@@ -28,42 +39,85 @@ export class NameGenerator {
     ]
 
     var prefixes = [
+      'Apex',
+      'Zenith',
+      'Bump',
       'Red',
       'Blue',
+      'Green',
       'Booty',
+      'Jacksie',
       'Iron',
       'Steep',
+      'Steel',
       'Deep',
+      'Big',
       'High',
       'Fast',
       'Great',
-      'Screaming'
+      'Hell'
     ]
 
     var mains = [
+      'Beast',
       'Corsair',
+      'Dragon',
+      'Serpent',
       'Cruiser',
       'Curse',
       'Diver',
       'Rattler',
+      'Dipper',
+      'Flight',
       'Titan',
       'Colossus',
+      'Emperor',
+      'Imperator',
       'Kraken',
-      'Widow'
+      'Widow',
+      'Wiggler',
+      'Joggler',
+      'Rocker',
+      'Peak',
+      'Summit',
+      'Shaker'
     ]
 
     var suffixes = [
       'of Steel',
       'of Fear',
-      'of Screaming'
+      'of Screaming',
+      'of Phobia',
+      'of Fright',
+      'of Terror'
     ]
 
-    var article = maybeNotEmpty(randomFromArray(articles))
-    var prefix = maybeNotEmpty(randomFromArray(prefixes))
-    var main = randomFromArray(mains)
-    var suffix = maybeNotEmpty(randomFromArray(suffixes), 0.25)
+    let generate = function (): string {
 
-    this.generatedName = [article, prefix, main, suffix].join(' ').replace(/\s+/g, ' ')
+      let combine = function (parts: Array<string>): string {
+        return parts.join(' ').replace(/\s+/g, ' ')
+      }
 
+      var article = maybePresent(randomFromArray(articles))
+      var prefix = maybePresent(randomFromArray(prefixes))
+      var main = randomFromArray(mains)
+      var suffix = maybePresent(randomFromArray(suffixes), 0.25)
+      var name = combine([article, prefix, main, suffix])
+      // prevent boring and very long names
+      if ((article === '' && prefix === '' && suffix === '') || (name.length >= 35)) {
+        name = generate()
+      }
+      // prevent identical prefix and suffix
+      if (suffix.indexOf(prefix) !== -1) {
+        name = generate()
+      }
+      // if all parts are present, remove the article
+      if (article !== '' && prefix !== '' && suffix !== '') {
+        name = combine([prefix, main, suffix])
+      }
+      return name
+    }
+
+    this.generatedName = generate()
   }
 }
