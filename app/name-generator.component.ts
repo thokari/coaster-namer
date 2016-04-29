@@ -10,7 +10,10 @@ import {Component, OnInit} from 'angular2/core'
       <div class="billboard-content">
         <div class="generated-name">{{ generatedName }}</div>
         <div id="generate-button" (click)="generateName()"></div>
-        <!--button id="generate-button" (click)="generateName()">Generate!</button-->
+        <div class="feedback-buttons">
+          <div id="thumbs-up"></div>
+          <div id="thumbs-down"></div>
+        </div>
       </div>
     </div>
   `
@@ -44,11 +47,13 @@ export class NameGenerator implements OnInit {
       'Bump',
       'Red',
       'Blue',
+      'Black',
       'Green',
       'Booty',
       'Jacksie',
       'Iron',
       'Steep',
+      'Speed',
       'Steel',
       'Deep',
       'Big',
