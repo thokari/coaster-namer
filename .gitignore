@@ -4,11 +4,12 @@ node_modules
 jspm_packages
 link-checker-results.txt
 **/*npm-debug.log.*
-*.js
-*.js.map
+web/app/*.js
+web/app/*.js.map
 _test-output
 _temp
 
+!web/js/*.js
 !**/*e2e-spec.js
 !karma*.js
 !protractor*.js
